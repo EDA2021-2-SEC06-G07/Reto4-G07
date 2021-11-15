@@ -27,9 +27,10 @@
 
 import config as cf
 from DISClib.ADT import list as lt
-from DISClib.ADT import map as mp
+from DISClib.ADT import map
 from DISClib.DataStructures import mapentry as me
 from DISClib.Algorithms.Sorting import shellsort as sa
+from DISClib.ADT import graph;
 assert cf
 
 """
@@ -40,8 +41,29 @@ los mismos.
 # Construccion de modelos
 
 # Funciones para agregar informacion al catalogo
+def add_airport(catalog, airport):
+    graph.insertVertex(catalog["routes"], airport["IATA"]);
+    map.put(catalog["airports"], airport["IATA"], airport);
+
+
+def add_route(catalog, route):
+    graph.addEdge(catalog["routes"], route["Departure"], route["Destination"], route["distance_km"]);
+
+
+def add_city(catalog, city):
+    map.put(catalog["cities"],city["city_ascii"],city);
 
 # Funciones para creacion de datos
+def init_catalog():
+    catalog = {
+        "routes": None,
+        "airports": None,
+        "cities": None
+    };
+    catalog["routes"] = graph.newGraph(datastructure="ADJ_LIST", directed=True);
+    catalog["cities"] = map.newMap(maptype="PROBING");
+    catalog["airports"] = map.newMap(maptype="PROBING");
+    return catalog;
 
 # Funciones de consulta
 

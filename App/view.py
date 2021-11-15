@@ -24,6 +24,7 @@ import config as cf
 import sys
 import controller
 from DISClib.ADT import list as lt
+from DISClib.ADT import map
 assert cf
 
 
@@ -39,20 +40,31 @@ def printMenu():
     print("1- Cargar información en el catálogo")
     print("2- ")
 
+
+def load():
+    catalog = controller.load();
+    return catalog
+
 catalog = None
 
 """
 Menu principal
 """
-while True:
-    printMenu()
-    inputs = input('Seleccione una opción para continuar\n')
-    if int(inputs[0]) == 1:
-        print("Cargando información de los archivos ....")
+if __name__ == "__main__":
+    running = True
+    while running:
+        printMenu()
+        inputs = input('Seleccione una opción para continuar\n')
+        if int(inputs[0]) == 0:
+            print("Cargando información de los archivos ....")
+            catalog = load()
 
-    elif int(inputs[0]) == 2:
-        pass
+            size_airports = map.size(catalog["airports"]);
+            size_cities = map.size(catalog["cities"]);
+            print(f"{size_airports} airports where added");
+            print(f"{size_cities} cities were added");
+        elif int(inputs[0]) == 2:
+            pass
 
-    else:
-        sys.exit(0)
-sys.exit(0)
+        else:
+            running = False 

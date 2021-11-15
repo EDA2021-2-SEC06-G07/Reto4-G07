@@ -31,6 +31,29 @@ El controlador se encarga de mediar entre la vista y el modelo.
 
 # Inicialización del Catálogo de libros
 
+def load():
+    catalog = model.init_catalog();
+
+    airport_file = cf.file_dir + "/Data/Skylines/airports_full.csv";
+    route_file = cf.file_dir + "/Data/Skylines/routes_full.csv";
+    cities_file = cf.file_dir + "/Data/Skylines/worldcities.csv";
+
+    airport_data = csv.DictReader(open(airport_file, encoding="utf-8"));
+    route_data = csv.DictReader(open(route_file, encoding="utf-8"));
+    cities_data = csv.DictReader(open(cities_file, encoding="utf-8"));
+
+    for city in cities_data:
+        model.add_city(catalog, city);
+
+    for airport in airport_data:
+        model.add_airport(catalog, airport);
+
+    for route in route_data:
+        model.add_route(catalog, route);
+
+    return catalog;
+
+
 # Funciones para la carga de datos
 
 # Funciones de ordenamiento

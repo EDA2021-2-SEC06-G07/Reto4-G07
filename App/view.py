@@ -37,15 +37,20 @@ operación solicitada
 
 def printMenu():
     print("Bienvenido")
-    print("1- Cargar información en el catálogo")
-    print("2- ")
+    print("0- Cargar información en el catálogo")
+    print("1- ")
 
 
 def load():
     catalog = controller.load();
     return catalog
 
+
 catalog = None
+
+
+def req1():
+    airports = controller.req1(catalog);
 
 """
 Menu principal
@@ -63,8 +68,8 @@ if __name__ == "__main__":
             size_cities = map.size(catalog["cities"]);
             print(f"{size_airports} airports where added");
             print(f"{size_cities} cities were added");
-        elif int(inputs[0]) == 2:
-            pass
+        elif int(inputs[0]) == 1:
+            req1();
 
         else:
             running = False 

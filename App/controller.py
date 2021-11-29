@@ -59,3 +59,7 @@ def load():
 # Funciones de ordenamiento
 
 # Funciones de consulta sobre el catálogo
+
+# Requirements
+def req1(catalog):
+    return model.req1(catalog);

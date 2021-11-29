@@ -28,7 +28,9 @@
 import config as cf
 from DISClib.ADT import list as lt
 from DISClib.ADT import map
+from DISClib.ADT import orderedmap as tree
 from DISClib.DataStructures import mapentry as me
+from DISClib.DataStructures import linkedlistiterator as iter
 from DISClib.Algorithms.Sorting import shellsort as sa
 from DISClib.ADT import graph;
 assert cf
@@ -53,6 +55,7 @@ def add_route(catalog, route):
 def add_city(catalog, city):
     map.put(catalog["cities"],city["city_ascii"],city);
 
+
 # Funciones para creacion de datos
 def init_catalog():
     catalog = {
@@ -70,3 +73,32 @@ def init_catalog():
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 # Funciones de ordenamiento
+
+# Compare functions
+
+def cmp_airport_size(degree1, degree2):
+    res = 1;
+    if(degree1 < degree2):
+        res = -1;
+    elif(degree1 == degree2):
+        res = 0;
+    
+    return res;
+
+# Requerimientos
+def req1(catalog):
+    airports = tree.newMap(omaptype='RBT', comparefunction=cmp_airport_size);
+    airportlist = map.valueSet(catalog['airports']);
+    
+    i = iter.newIterator(airportlist);
+    while(iter.hasNext(i)):
+        airport = iter.next(i);
+        degree = graph.degree(catalog['routes'], airport);
+        tree.put(airports,airport,degree);
+
+    return tree.valueSet(airports);
+
+
+
+def req3():
+    pass

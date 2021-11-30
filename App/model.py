@@ -93,10 +93,10 @@ def req1(catalog):
     i = iter.newIterator(airportlist);
     while(iter.hasNext(i)):
         airport = iter.next(i);
-        degree = graph.degree(catalog['routes'], airport);
-        tree.put(airports,airport,degree);
+        degree = graph.degree(catalog['routes'], airport['IATA']);
+        tree.put(airports,degree,airport);
 
-    return tree.valueSet(airports);
+    return airports;
 
 
 

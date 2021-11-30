@@ -25,6 +25,8 @@ import sys
 import controller
 from DISClib.ADT import list as lt
 from DISClib.ADT import map
+from DISClib.ADT import orderedmap as tree
+from DISClib.DataStructures import linkedlistiterator as iter
 assert cf
 
 
@@ -51,6 +53,23 @@ catalog = None
 
 def req1():
     airports = controller.req1(catalog);
+
+    airports_list = tree.valueSet(airports);
+    degree_list = tree.keySet(airports);
+
+    i = iter.newIterator(airports_list);
+    j = iter.newIterator(degree_list);
+    while(iter.hasNext(i)):
+        airport = iter.next(i);
+        degree = iter.next(j);
+        IATA = airport['IATA'];
+        name = airport['Name'];
+        city = airport['City'];
+        country = airport['Country'];
+        print(f"Airport {name} in city {city} in {country} with the IATA {IATA}");
+        print(f"Has {degree} amount of conections.\n");
+
+    
 
 """
 Menu principal

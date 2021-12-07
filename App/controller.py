@@ -63,3 +63,15 @@ def load():
 # Requirements
 def req1(catalog):
     return model.req1(catalog);
+
+
+def req2(catalogo,Aeropuerto1, Aeropuerto2):
+    return model.req2(catalogo,Aeropuerto1, Aeropuerto2)
+
+
+def req3(catalog, origin, dest):
+    return model.req3(catalog, origin, dest);
+
+
+def req5(catalogo, aeropuerto):
+    return model.req5(catalogo,aeropuerto)

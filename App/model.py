@@ -31,6 +31,7 @@ from DISClib.ADT import map
 from DISClib.ADT import orderedmap as tree
 from DISClib.DataStructures import mapentry as me
 from DISClib.DataStructures import linkedlistiterator as iter
+from DISClib.Algorithms.Graphs import dijsktra
 from DISClib.Algorithms.Sorting import shellsort as sa
 from DISClib.ADT import graph;
 assert cf
@@ -45,7 +46,7 @@ los mismos.
 # Funciones para agregar informacion al catalogo
 def add_airport(catalog, airport):
     graph.insertVertex(catalog["routes"], airport["IATA"]);
-    map.put(catalog["airports"], airport["IATA"], airport);
+    map.put(catalog["airports"], airport["City"], airport);
 
 
 def add_route(catalog, route):
@@ -99,6 +100,32 @@ def req1(catalog):
     return airports;
 
 
+def req2(catalogo,Aeropuerto1,Aeropuerto2):
+    scc_ = scc.KosarajuSCC(catalogo['routes'])
+    es_conectado = scc.stronglyConnected(scc_,Aeropuerto1,Aeropuerto2)
+    total = scc.sccCount(catalogo['routes'], scc_,Aeropuerto2)
+    print('---------------------RT/---------------------')
+    print('El numero de clusteres es ',total['components'])
+    return es_conectado
 
-def req3():
-    pass
+
+def req3(catalog, origin, dest):
+    search = dijsktra.Dijkstra(catalog['routes'], origin);
+    path = dijsktra.pathTo(search, dest);
+    return path;
+
+
+def req5(catalogo, Aeropuerto):
+    info= lt.newList()
+    dfs_=dfs.DepthFirstSearch(catalogo['routes'], Aeropuerto)
+    map.remove(dfs_['visited'],Aeropuerto)
+    lista  = map.keySet(dfs_['visited'])
+    i= iter.newIterator(lista)
+    while(iter.hasNext(i)):
+        airport = iter.next(i)
+        papa= map.get(catalogo['airports'],airport)
+        lt.addLast(info,papa['value'])
+        print(lt.addLast(info,papa['value']))
+    
+    return info
+

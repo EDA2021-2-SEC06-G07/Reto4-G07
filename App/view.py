@@ -20,6 +20,7 @@
  * along withthis program.  If not, see <http://www.gnu.org/licenses/>.
  """
 
+from typing import Collection
 import config as cf
 import sys
 import controller
@@ -41,6 +42,7 @@ def printMenu():
     print("Bienvenido")
     print("0- Cargar información en el catálogo")
     print("1- ")
+    print("3- ");
 
 
 def load():
@@ -67,8 +69,32 @@ def req1():
         city = airport['City'];
         country = airport['Country'];
         print(f"Airport {name} in city {city} in {country} with the IATA {IATA}");
-        print(f"Has {degree} amount of conections.\n");
+        print(f"Has {degree} amount of connections.\n");
 
+
+def req2():
+    respuesta = controller.req2(catalog,Aeropuerto1,Aeropuerto2)
+    
+    if respuesta is True:
+        print('los dos aeropuertos SON fuertemente conectados.')
+    if respuesta is False:
+        print('Los dos aeropuertos NO son fuertemente conectados')
+    print('--------------------------------------------------')
+
+
+def req3(city_origin, city_destination):
+    origin = map.get(catalog["airports"], city_origin)['IATA'];
+    destination = map.get(catalog['airports'], city_destination)['IATA'];
+    path = controller.req3(catalog, origin, destination);
+    print(path);
+
+
+def req5():
+    info= controller.req5(catalog,Aeropuerto)
+    i= iter.newIterator(info)
+    while(iter.hasNext(i)):
+        airport = iter.next(i)
+        print(airport['Name'])
     
 
 """
@@ -89,6 +115,11 @@ if __name__ == "__main__":
             print(f"{size_cities} cities were added");
         elif int(inputs[0]) == 1:
             req1();
+
+        elif int(inputs[0]) == 3:
+            origin = input("Ciudad de origen:");
+            destination = input("Ciudad de destino:");
+            req3(origin, destination);
 
         else:
             running = False 

@@ -72,8 +72,8 @@ def req1():
         print(f"Has {degree} amount of connections.\n");
 
 
-def req2():
-    respuesta = controller.req2(catalog,Aeropuerto1,Aeropuerto2)
+def req2(aeropuerto1, aeropuerto2):
+    respuesta = controller.req2(catalog,aeropuerto1,aeropuerto2)
     
     if respuesta is True:
         print('los dos aeropuertos SON fuertemente conectados.')
@@ -89,8 +89,8 @@ def req3(city_origin, city_destination):
     print(path);
 
 
-def req5():
-    info= controller.req5(catalog,Aeropuerto)
+def req5(aeropuerto):
+    info= controller.req5(catalog,aeropuerto)
     i= iter.newIterator(info)
     while(iter.hasNext(i)):
         airport = iter.next(i)
@@ -115,11 +115,16 @@ if __name__ == "__main__":
             print(f"{size_cities} cities were added");
         elif int(inputs[0]) == 1:
             req1();
-
+        elif int(inputs[0]) == 2:
+            aeropuerto1 = str(input('Agregue el primer aeropuerto: '))
+            aeropuerto2 = str(input('Agregue el segundo aeropuerto: '))
+            req2(aeropuerto1, aeropuerto2)
         elif int(inputs[0]) == 3:
             origin = input("Ciudad de origen:");
             destination = input("Ciudad de destino:");
             req3(origin, destination);
-
+        elif int(inputs[0]) == 5:
+            aeropuerto = str(input('Agregue el aeropuerto: '))
+            req5(aeropuerto)
         else:
             running = False 

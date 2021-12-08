@@ -82,11 +82,23 @@ def req2(aeropuerto1, aeropuerto2):
     print('--------------------------------------------------')
 
 
-def req3(city_origin, city_destination):
-    origin = map.get(catalog["airports"], city_origin)['IATA'];
-    destination = map.get(catalog['airports'], city_destination)['IATA'];
+def req3(origin, destination):
     path = controller.req3(catalog, origin, destination);
-    print(path);
+
+    total_distance = 0;
+    i = iter.newIterator(path);
+    while iter.hasNext(i):
+        current = iter.next(i);
+        airportA = map.get(catalog['airports'],current['vertexA'])['value']['Name'];
+        airportB = map.get(catalog['airports'],current['vertexB'])['value']['Name'];
+        distance = current['weight'];
+
+        print(f"{airportA} to {airportB} has {distance}km");
+        total_distance += distance;
+
+    print(f"The total distance you will travel is: {total_distance}");
+    
+
 
 
 def req5(aeropuerto):
@@ -123,6 +135,8 @@ if __name__ == "__main__":
             origin = input("Ciudad de origen:");
             destination = input("Ciudad de destino:");
             req3(origin, destination);
+        elif int(inputs[0]) == 4:
+            pass
         elif int(inputs[0]) == 5:
             aeropuerto = str(input('Agregue el aeropuerto: '))
             req5(aeropuerto)

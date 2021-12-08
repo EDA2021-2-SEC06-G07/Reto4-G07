@@ -32,6 +32,8 @@ from DISClib.ADT import orderedmap as tree
 from DISClib.DataStructures import mapentry as me
 from DISClib.DataStructures import linkedlistiterator as iter
 from DISClib.Algorithms.Graphs import dijsktra
+from DISClib.Algorithms.Graphs import scc
+from DISClib.Algorithms.Graphs import dfs
 from DISClib.Algorithms.Sorting import shellsort as sa
 from DISClib.ADT import graph;
 assert cf
@@ -46,11 +48,11 @@ los mismos.
 # Funciones para agregar informacion al catalogo
 def add_airport(catalog, airport):
     graph.insertVertex(catalog["routes"], airport["IATA"]);
-    map.put(catalog["airports"], airport["City"], airport);
+    map.put(catalog["airports"], airport["IATA"], airport);
 
 
 def add_route(catalog, route):
-    graph.addEdge(catalog["routes"], route["Departure"], route["Destination"], route["distance_km"]);
+    graph.addEdge(catalog["routes"], route["Departure"], route["Destination"], float(route["distance_km"]));
 
 
 def add_city(catalog, city):
@@ -110,8 +112,20 @@ def req2(catalogo,Aeropuerto1,Aeropuerto2):
 
 
 def req3(catalog, origin, dest):
-    search = dijsktra.Dijkstra(catalog['routes'], origin);
-    path = dijsktra.pathTo(search, dest);
+    airports = map.valueSet(catalog['airports']);
+    IATA_origin = None;
+    IATA_dest = None;
+
+    i = iter.newIterator(airports);
+    while iter.hasNext(i):
+        airport = iter.next(i);
+        if airport['City'] == origin:
+            IATA_origin = airport['IATA']
+        elif airport['City'] == dest:
+            IATA_dest = airport['IATA']
+
+    search = dijsktra.Dijkstra(catalog['routes'], IATA_origin);
+    path = dijsktra.pathTo(search, IATA_dest);
     return path;
 
 

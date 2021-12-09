@@ -24,6 +24,7 @@ from typing import Collection
 import config as cf
 import sys
 import controller
+import timer
 from DISClib.ADT import list as lt
 from DISClib.ADT import map
 from DISClib.ADT import orderedmap as tree
@@ -111,10 +112,10 @@ def req4():
         print('Nombre: '+airport['City'])
         print('Nombre: '+airport['Country'])
         print('')
+        
 
-
-def req5():
-    info= controller.req5(catalog,Aeropuerto)
+def req5(aeropuerto):
+    info = controller.req5(catalog,aeropuerto)
     
     print('Los aeropuertos afectados son: ')
     print('')
@@ -127,6 +128,23 @@ def req5():
         print('Nombre: '+airport['Country'])
         print('')
     
+
+def test_req2():
+    pass
+
+
+def test_req3():
+    pass
+
+
+def test_req4():
+    pass
+
+
+def test_req5():
+    pass
+
+
 
 """
 Menu principal
@@ -157,9 +175,25 @@ if __name__ == "__main__":
         elif int(inputs[0]) == 4:
             aeropuerto= input('Agregue el aeropuerto:')
             millas= float(input('Escribe las millas: '))
-            req4()
+            req4(aeropuerto, millas)
         elif int(inputs[0]) == 5:
             aeropuerto = str(input('Agregue el aeropuerto: '))
             req5(aeropuerto)
+        elif int(inputs[0]) == 7:
+            stop_watch = timer.Timer()
+            catalog = load()
+
+            time1 = stop_watch.time_function(req1)
+            time2 = stop_watch.time_function(test_req2)
+            time3 = stop_watch.time_function(test_req3)
+            time4 = stop_watch.time_function(test_req4)
+            time5 = stop_watch.time_function(test_req5)
+
+            print('\n\n')
+            print("time req1: " + str(time1) + 's')
+            print("time req2: " + str(time2) + 's')
+            print("time req3: " + str(time3) + 's')
+            print("time req4: " + str(time4) + 's')
+            print("time req5: " + str(time5) + 's')
         else:
             running = False 

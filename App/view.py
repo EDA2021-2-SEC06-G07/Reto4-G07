@@ -99,14 +99,33 @@ def req3(origin, destination):
     print(f"The total distance you will travel is: {total_distance}");
     
 
+def req4():
+    respuesta = controller.req4(catalog, aeropuerto, millas)
+    print('Los aeropuertos en la rama son: ')
+    print('')
+    i= iter.newIterator(respuesta)
+    while(iter.hasNext(i)):
+        airport = iter.next(i)
+        print('IATA: '+airport['IATA'])
+        print('Nombre: '+airport['Name'])
+        print('Nombre: '+airport['City'])
+        print('Nombre: '+airport['Country'])
+        print('')
 
 
-def req5(aeropuerto):
-    info= controller.req5(catalog,aeropuerto)
+def req5():
+    info= controller.req5(catalog,Aeropuerto)
+    
+    print('Los aeropuertos afectados son: ')
+    print('')
     i= iter.newIterator(info)
     while(iter.hasNext(i)):
         airport = iter.next(i)
-        print(airport['Name'])
+        print('IATA: '+airport['IATA'])
+        print('Nombre: '+airport['Name'])
+        print('Nombre: '+airport['City'])
+        print('Nombre: '+airport['Country'])
+        print('')
     
 
 """
@@ -136,7 +155,9 @@ if __name__ == "__main__":
             destination = input("Ciudad de destino:");
             req3(origin, destination);
         elif int(inputs[0]) == 4:
-            pass
+            aeropuerto= input('Agregue el aeropuerto:')
+            millas= float(input('Escribe las millas: '))
+            req4()
         elif int(inputs[0]) == 5:
             aeropuerto = str(input('Agregue el aeropuerto: '))
             req5(aeropuerto)

@@ -35,6 +35,8 @@ from DISClib.Algorithms.Graphs import dijsktra
 from DISClib.Algorithms.Graphs import scc
 from DISClib.Algorithms.Graphs import dfs
 from DISClib.Algorithms.Sorting import shellsort as sa
+from DISClib.Algorithms.Graphs import dijsktra as dj
+from DISClib.ADT import stack
 from DISClib.ADT import graph;
 assert cf
 
@@ -127,6 +129,39 @@ def req3(catalog, origin, dest):
     search = dijsktra.Dijkstra(catalog['routes'], IATA_origin);
     path = dijsktra.pathTo(search, IATA_dest);
     return path;
+
+
+def req4(catalogo,aeropuerto,millas):
+    kilometros = millas * 1.60934
+    dij= dj.Dijkstra(catalogo['routes'],aeropuerto)
+    vertices = 0
+    lista = graph.vertices(catalogo['routes'])
+    i= iter.newIterator(lista)
+    while(iter.hasNext(i)):
+        airport = iter.next(i)
+        camino = dj.pathTo(dij,airport)
+        if camino != None:
+            tamaño = stack.size(camino)
+            if tamaño > vertices:
+                vertices = tamaño
+                ruta= camino
+    elemento = 'nada'
+    lista2 = lt.newList()
+    distancia = 0
+    while stack.size(ruta) != None and stack.size(ruta) != 0:
+        elemento = stack.pop(ruta)
+        mapa = map.get(catalogo['airports'] ,elemento['vertexB'])
+        lt.addLast(lista2, mapa['value'])
+        distancia += elemento['weight']
+    print('---------------------RT/---------------------')
+    if distancia < kilometros:
+        print('La distancia recorrida es menor a la permitida por: ' + str(kilometros - distancia) + ' kilometros')
+    elif distancia > kilometros:
+        print('La distancia recorrida es mayor a la permitida por: ' + str(distancia - kilometros) + ' kilometros')
+   
+    print('El camino más largo posee '+str(vertices)+' vertices.')
+    
+    return lista2
 
 
 def req5(catalogo, Aeropuerto):

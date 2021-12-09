@@ -42,8 +42,13 @@ operación solicitada
 def printMenu():
     print("Bienvenido")
     print("0- Cargar información en el catálogo")
-    print("1- ")
-    print("3- ");
+    print("1- Aeropuerto i sus conscciones")
+    print('2- Encontrar clústeres de tráfico aéreo');
+    print("3- Como llegar rde una ciudad a otra");
+    print('4- Utilizar las millas de viajero');
+    print('5- Cuantificar el efecto de un aeropuerto cerrado');
+    print('7- speed test');
+    print('8- exit');
 
 
 def load():
@@ -100,7 +105,7 @@ def req3(origin, destination):
     print(f"The total distance you will travel is: {total_distance}");
     
 
-def req4():
+def req4(aeropuerto, millas):
     respuesta = controller.req4(catalog, aeropuerto, millas)
     print('Los aeropuertos en la rama son: ')
     print('')
@@ -130,19 +135,19 @@ def req5(aeropuerto):
     
 
 def test_req2():
-    pass
+    req2('LED', 'RTP');
 
 
 def test_req3():
-    pass
+    req3('St. Petersburg', 'Lisbon');
 
 
 def test_req4():
-    pass
+    req4('LIS', 19850.0);
 
 
 def test_req5():
-    pass
+    req5('DXB');
 
 
 

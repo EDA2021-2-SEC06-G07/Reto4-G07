@@ -174,7 +174,6 @@ def req5(catalogo, Aeropuerto):
         airport = iter.next(i)
         papa= map.get(catalogo['airports'],airport)
         lt.addLast(info,papa['value'])
-        print(lt.addLast(info,papa['value']))
     
     return info
 

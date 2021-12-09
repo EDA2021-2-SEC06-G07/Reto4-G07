@@ -34,8 +34,8 @@ El controlador se encarga de mediar entre la vista y el modelo.
 def load():
     catalog = model.init_catalog();
 
-    airport_file = cf.file_dir + "/Data/Skylines/airports-utf8-small.csv";
-    route_file = cf.file_dir + "/Data/Skylines/routes-utf8-small.csv";
+    airport_file = cf.file_dir + "/Data/Skylines/airports-utf8-large.csv";
+    route_file = cf.file_dir + "/Data/Skylines/routes-utf8-large.csv";
     cities_file = cf.file_dir + "/Data/Skylines/worldcities-utf8.csv";
 
     airport_data = csv.DictReader(open(airport_file, encoding="utf-8"));
@@ -71,6 +71,10 @@ def req2(catalogo,Aeropuerto1, Aeropuerto2):
 
 def req3(catalog, origin, dest):
     return model.req3(catalog, origin, dest);
+
+
+def req4(catalog, aeropuerto, millas):
+    return model.req4(catalog, aeropuerto, millas);
 
 
 def req5(catalogo, aeropuerto):
